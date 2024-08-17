@@ -1,0 +1,104 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "insurances",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "premiumPaid",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "claimableAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "hasClaimed",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "purchaseInsurance",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Insurance.sol": "SimpleInsurance"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Insurance.sol": {
+			"keccak256": "0x5ca9582b78429e4847fa423a825cc84689fae3183b0038930388a523aaa9714e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d832945288aca1f6b601bfad7738c0db5e672287c9723f6ed8738fd6710d7b14",
+				"dweb:/ipfs/Qmev3zG5XgNSuA6So6nvhV2PW4Aoa81TE7qpXNNg3ZDRqF"
+			]
+		}
+	},
+	"version": 1
+}
