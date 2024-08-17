@@ -1,0 +1,20 @@
+body {
+    background-color: #FFFDE7;
+}
+
+button{
+    width: 220px;
+    height: 60px;
+    padding: 0px 10px 0px 10px;
+    background: #5B5B5B;
+    color: #F8F0C2;
+    border-color: #23232300;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 23px 23px 23px 23px;
+    font-family: "Abhaya Libre";
+    font-weight: bold;
+    font-size: 35px;
+    text-align: center;
+    margin-left:500px;
+    }
