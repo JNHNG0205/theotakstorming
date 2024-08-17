@@ -1,79 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>home</title>
-    <link href= "style.css" rel="stylesheet">
-</head>
-<body>
-    <img class ="grass" src="grass.jpg">
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <img class="grass" src="grass.jpg" />
     <div class="header">
-        <a href="#" style="text-align: left;">Home</a>
-        <a href="#" style="text-align: left;">About us</a>
-        <a href="#">Contact Us</a>
+      <a href="#" style="text-align: left">Home</a>
+      <a href="#" style="text-align: left">About us</a>
+      <a href="#">Contact Us</a>
 
-        <button>Wallet</button>
-        <img class ="logo" src="logo.jpg">
+      <button id="connectButton">Wallet</button>
+      <button id="disconnectButton" style="display: none">Disconnect</button>
+      <span
+        id="walletAddress"
+        style="margin-left: 10px; color: #546747; font-family: Abhaya Libre"
+      ></span>
+      <img class="logo" src="logo.jpg" />
     </div>
-    
+
     <div class="container">
-        <div class="explore">
-        <br><br>
+      <div class="explore">
+        <br /><br />
         <h2>Explore</h2>
         <p>
-            Travel insurance provides financial protection<br> 
-            against unforeseen events like<br> trip cancellations, 
-            medical emergencies, or <br>lost luggage while you're away from home.
+          Travel insurance provides financial protection<br />
+          against unforeseen events like<br />
+          trip cancellations, medical emergencies, or <br />lost luggage while
+          you're away from home.
         </p>
-        </div>
-        <img class="img" src="explore.jpg" >
+      </div>
+      <img class="img" src="explore.jpg" />
     </div>
 
     <div class="service">
-        <img class="grass2"src="grass2.png">
-        <div>
-            <h1 style="margin-left:500px; width: 300px; color: #546747;font-family: Abhaya Libre;"  >Tourism Insurance</h1>
-            <img class="grass3"src="grass2.png">
-            <h3 style="margin-left:444px; width: 500px;margin-top: -30px; color: #546747;font-family: Abhaya Libre;">Secure Your Journey, Embrace the Adventure!</h3>
-        </div>
+      <img class="grass2" src="grass2.png" />
+      <div>
+        <h1
+          style="
+            margin-left: 500px;
+            width: 300px;
+            color: #546747;
+            font-family: Abhaya Libre;
+          "
+        >
+          Tourism Insurance
+        </h1>
+        <img class="grass3" src="grass2.png" />
+        <h3
+          style="
+            margin-left: 444px;
+            width: 500px;
+            margin-top: -30px;
+            color: #546747;
+            font-family: Abhaya Libre;
+          "
+        >
+          Secure Your Journey, Embrace the Adventure!
+        </h3>
+      </div>
 
-        <br><br>
-        <div class="rectangle-1">
-                <h2 style="text-align:center;">Medical Coverage</h2>
-                <h4 style="text-align: center;">
-                    hospitalization <br>
-                    emergency treatment
-                </h4>
-                <h5>RM5000-RM50,000</h5>
-        </div>
+      <br /><br />
+      <div class="rectangle-1">
+        <h2 style="text-align: center">Medical Coverage</h2>
+        <h4 style="text-align: center">
+          hospitalization <br />
+          emergency treatment
+        </h4>
+        <h5>RM5000-RM50,000</h5>
+      </div>
 
-        <div class="rectangle-2">
-            <h2 style="text-align: center;">Trip Cancellation</h2>
-            <h4 style="text-align: center;">
-                severe weather <br> unexpected emergencies
-            </h4>
-            <h5>RM1000-RM10,000</h5>
-        </div>
+      <div class="rectangle-2">
+        <h2 style="text-align: center">Trip Cancellation</h2>
+        <h4 style="text-align: center">
+          severe weather <br />
+          unexpected emergencies
+        </h4>
+        <h5>RM1000-RM10,000</h5>
+      </div>
 
-
-        <div class="rectangle-3">
-            <h2 style="text-align: center;">
-                Personal Belonging Coverage
-            </h2>
-            <h4 style="text-align: center;"> 
-                theft<br>
-                damage
-            </h4>
-            <h6>RM200-RM2000</h6>
-        </div>
-        <button id="form" onclick="document.location='form.html'"> Form </button>
-        
+      <div class="rectangle-3">
+        <h2 style="text-align: center">Personal Belonging Coverage</h2>
+        <h4 style="text-align: center">
+          theft<br />
+          damage
+        </h4>
+        <h6>RM200-RM2000</h6>
+      </div>
+      <button id="form" onclick="document.location='form.html'">Form</button>
     </div>
-    <img class="grass4"src="grass3.png">
-    <img class="grass5"src="grass3.png">
+    <img class="grass4" src="grass3.png" />
+    <img class="grass5" src="grass3.png" />
 
-    
-   
-</body>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+    <script src="app.js"></script>
+  </body>
 </html>

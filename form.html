@@ -1,23 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href= "form.css" rel="stylesheet">
-</head>
-<body>
-    <div>
-        <h1 style="text-align: center;">INSURANCE CLAIM FORM</h1>
-            <div style="text-align: center;"><img src="form.jpg" alt="" width="600" height="600"></div>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insurance Claim Form</title>
+    <link href="form.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="header">
+      <button id="connectButton">Connect Wallet</button>
+      <button id="disconnectButton" style="display: none">
+        Disconnect Wallet
+      </button>
+      <span id="walletAddress" class="wallet-info">Not connected</span>
+    </div>
 
-        <script>
-            function myFunction() {
-              alert ('RM**** successfully tranfer')
+    <div class="content">
+      <h1 style="text-align: center">INSURANCE CLAIM FORM</h1>
+      <div style="text-align: center">
+        <img src="form.jpg" alt="" width="600" height="600" />
+      </div>
+    </div>
+
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+    <script>
+      let provider;
+      let signer;
+
+      async function connectWallet() {
+        if (typeof window.ethereum !== "undefined") {
+          try {
+            const accounts = await ethereum.request({
+              method: "eth_requestAccounts",
+            });
+            if (accounts.length > 0) {
+              provider = new ethers.providers.Web3Provider(window.ethereum);
+              signer = provider.getSigner();
+              const userAddress = await signer.getAddress();
+              document.getElementById("walletAddress").innerText = userAddress;
+              document.getElementById("disconnectButton").style.display =
+                "inline-block";
+              document.getElementById("connectButton").style.display = "none";
+              localStorage.setItem("walletAddress", userAddress);
+            } else {
+              alert("No account found. Please connect to MetaMask.");
             }
-        </script>
-        
-        <button onclick="myFunction()">Submit</button>
-</body>
+          } catch (error) {
+            console.error(error);
+            alert("Error connecting to MetaMask");
+          }
+        } else {
+          alert(
+            "MetaMask is not installed. Please install it to use this dApp."
+          );
+        }
+      }
+
+      function disconnectWallet() {
+        document.getElementById("walletAddress").innerText = "Not connected";
+        provider = null;
+        signer = null;
+        localStorage.removeItem("walletAddress");
+        document.getElementById("disconnectButton").style.display = "none";
+        document.getElementById("connectButton").style.display = "inline-block";
+        alert(
+          "Please disconnect from MetaMask or switch accounts to ensure a fresh connection next time."
+        );
+      }
+
+      document
+        .getElementById("connectButton")
+        .addEventListener("click", connectWallet);
+      document
+        .getElementById("disconnectButton")
+        .addEventListener("click", disconnectWallet);
+
+      window.ethereum.on("accountsChanged", function (accounts) {
+        if (accounts.length > 0) {
+          document.getElementById("walletAddress").innerText = accounts[0];
+          localStorage.setItem("walletAddress", accounts[0]);
+        } else {
+          disconnectWallet();
+        }
+      });
+
+      window.ethereum.on("chainChanged", async (chainId) => {
+        if (provider) {
+          try {
+            provider = null;
+            signer = null;
+            await connectWallet();
+          } catch (error) {
+            console.error("Error reconnecting after network change:", error);
+            alert("Error reconnecting to MetaMask after network change.");
+          }
+        }
+      });
+
+      window.addEventListener("load", () => {
+        const storedAddress = localStorage.getItem("walletAddress");
+        if (storedAddress) {
+          document.getElementById("walletAddress").innerText = storedAddress;
+          document.getElementById("disconnectButton").style.display =
+            "inline-block";
+          document.getElementById("connectButton").style.display = "none";
+          provider = new ethers.providers.Web3Provider(window.ethereum);
+          signer = provider.getSigner();
+        }
+      });
+    </script>
+  </body>
 </html>

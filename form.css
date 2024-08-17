@@ -1,20 +1,47 @@
 body {
-    background-color: #FFFDE7;
+  background-color: #fffde7;
 }
 
-button{
-    width: 220px;
-    height: 60px;
-    padding: 0px 10px 0px 10px;
-    background: #5B5B5B;
-    color: #F8F0C2;
-    border-color: #23232300;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 23px 23px 23px 23px;
-    font-family: "Abhaya Libre";
-    font-weight: bold;
-    font-size: 35px;
-    text-align: center;
-    margin-left:500px;
-    }
+button {
+  width: 220px;
+  height: 60px;
+  padding: 0px 10px 0px 10px;
+  background: #5b5b5b;
+  color: #f8f0c2;
+  border-color: #23232300;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 23px 23px 23px 23px;
+  font-family: "Abhaya Libre";
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  margin-left: 500px;
+}
+.header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #f8f9fa;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  z-index: 1000; /* Ensures the header is above other content */
+}
+.header button {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+.wallet-info {
+  margin-left: 10px;
+  font-family: Arial, sans-serif;
+}
+/* Main content styling */
+.content {
+  margin-top: 80px; /* Adds space at the top for the fixed header */
+  padding: 20px;
+}
