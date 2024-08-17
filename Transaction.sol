@@ -2,8 +2,6 @@
 pragma solidity ^0.8.0;
 
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-
 contract SimpleTransaction {
     // Mapping to store the balance of each address
     mapping(address => uint256) public balances;
