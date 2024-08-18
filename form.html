@@ -46,7 +46,9 @@
           <h2>Documents</h2>
           <input class="file" type="file" id="myFile" name="filename" />
           <br /><br />
-          <button class="submitBtn" type="submit">Submit</button>
+          <button class="submitBtn" type="submit" id="submitButton">
+            Submit
+          </button>
         </form>
       </div>
     </div>
@@ -137,6 +139,155 @@
           signer = provider.getSigner();
         }
       });
+
+      const contractABI = [
+        {
+          inputs: [],
+          name: "claimInsurance",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "user",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "claimAmount",
+              type: "uint256",
+            },
+          ],
+          name: "InsuranceClaimed",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "user",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "premiumPaid",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "claimableAmount",
+              type: "uint256",
+            },
+          ],
+          name: "InsurancePurchased",
+          type: "event",
+        },
+        {
+          inputs: [],
+          name: "purchaseInsurance",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          stateMutability: "payable",
+          type: "receive",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          name: "insurances",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "premiumPaid",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "claimableAmount",
+              type: "uint256",
+            },
+            {
+              internalType: "bool",
+              name: "hasClaimed",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "owner",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+      ];
+
+      const contractAddress = "0xF822F70b6294B468d796983ED5245dA1bAeb95ce";
+
+      async function claimInsurance() {
+        if (!provider || !signer) {
+          alert("Please connect your wallet first.");
+          return;
+        }
+
+        try {
+          // Initialize the contract
+          const contract = new ethers.Contract(
+            contractAddress,
+            contractABI,
+            signer
+          );
+
+          // Call the claimInsurance function
+          const tx = await contract.claimInsurance();
+
+          // Wait for the transaction to be mined
+          await tx.wait();
+          alert("Insurance claim submitted successfully!");
+        } catch (error) {
+          console.error("Error claiming insurance:", error);
+          alert("Failed to claim insurance. Please try again.");
+        }
+      }
+
+      // Attach the claimInsurance function to the submit button
+      document
+        .getElementById("submitButton")
+        .addEventListener("click", (event) => {
+          // Prevent the default form submission
+          event.preventDefault();
+          claimInsurance();
+        });
     </script>
   </body>
 </html>

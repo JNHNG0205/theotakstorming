@@ -1,6 +1,120 @@
 let provider;
 let signer;
 
+const contractABI = [
+  {
+    inputs: [],
+    name: "claimInsurance",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "claimAmount",
+        type: "uint256",
+      },
+    ],
+    name: "InsuranceClaimed",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "premiumPaid",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "claimableAmount",
+        type: "uint256",
+      },
+    ],
+    name: "InsurancePurchased",
+    type: "event",
+  },
+  {
+    inputs: [],
+    name: "purchaseInsurance",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    stateMutability: "payable",
+    type: "receive",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "insurances",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "premiumPaid",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "claimableAmount",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "hasClaimed",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "owner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+];
+
+const contractAddress = "0xF822F70b6294B468d796983ED5245dA1bAeb95ce";
+
 async function connectWallet() {
   if (typeof window.ethereum !== "undefined") {
     try {
@@ -80,4 +194,67 @@ window.addEventListener("load", () => {
     provider = new ethers.providers.Web3Provider(window.ethereum);
     signer = provider.getSigner();
   }
+});
+
+// New function to handle buying insurance
+async function buyInsurance() {
+  if (!provider || !signer) {
+    alert("Please connect your wallet first.");
+    return;
+  }
+
+  try {
+    // Initialize the contract
+    const contract = new ethers.Contract(contractAddress, contractABI, signer);
+
+    // Call the purchaseInsurance function
+    const tx = await contract.purchaseInsurance({
+      value: ethers.utils.parseEther("0.01"), // Adjust the value as needed
+    });
+
+    // Wait for the transaction to be mined
+    await tx.wait();
+    alert("Insurance purchased successfully!");
+  } catch (error) {
+    console.error("Error purchasing insurance:", error);
+    alert("Failed to purchase insurance. Please try again.");
+  }
+}
+
+// Attach the buyInsurance function to all Buy buttons
+document
+  .querySelectorAll(
+    ".rectangle-1 button, .rectangle-2 button, .rectangle-3 button"
+  )
+  .forEach((button) => {
+    button.addEventListener("click", buyInsurance);
+  });
+
+async function claimInsurance() {
+  if (!provider || !signer) {
+    alert("Please connect your wallet first.");
+    return;
+  }
+
+  try {
+    // Initialize the contract
+    const contract = new ethers.Contract(contractAddress, contractABI, signer);
+
+    // Call the claimInsurance function
+    const tx = await contract.claimInsurance();
+
+    // Wait for the transaction to be mined
+    await tx.wait();
+    alert("Insurance claim submitted successfully!");
+  } catch (error) {
+    console.error("Error claiming insurance:", error);
+    alert("Failed to claim insurance. Please try again.");
+  }
+}
+
+// Attach the claimInsurance function to the submit button
+document.getElementById("submitButton").addEventListener("click", (event) => {
+  // Prevent the default form submission
+  event.preventDefault();
+  claimInsurance();
 });
