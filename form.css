@@ -2,7 +2,7 @@ body {
   background-color: #fffde7;
 }
 
-button {
+.connectBtn {
   width: 220px;
   height: 60px;
   padding: 0px 10px 0px 10px;
@@ -19,7 +19,7 @@ button {
   margin-left: 500px;
 }
 .header {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   background: #f8f9fa;
@@ -44,4 +44,34 @@ button {
 .content {
   margin-top: 80px; /* Adds space at the top for the fixed header */
   padding: 20px;
+}
+
+.container {
+  width: 500px;
+  height: auto;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: solid;
+  padding: 10px;
+}
+.file {
+  top: 390px;
+  left: 20px;
+}
+
+.submitBtn {
+  width: 220px;
+  height: 60px;
+  padding: 0px 10px 0px 10px;
+  background: #5b5b5b;
+  color: #f8f0c2;
+  border-color: #23232300;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 23px 23px 23px 23px;
+  font-family: "Abhaya Libre";
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
 }

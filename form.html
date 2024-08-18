@@ -8,8 +8,8 @@
   </head>
   <body>
     <div class="header">
-      <button id="connectButton">Connect Wallet</button>
-      <button id="disconnectButton" style="display: none">
+      <button class="connectBtn" id="connectButton">Connect Wallet</button>
+      <button class="connectBtn" id="disconnectButton" style="display: none">
         Disconnect Wallet
       </button>
       <span id="walletAddress" class="wallet-info">Not connected</span>
@@ -17,8 +17,37 @@
 
     <div class="content">
       <h1 style="text-align: center">INSURANCE CLAIM FORM</h1>
-      <div style="text-align: center">
-        <img src="form.jpg" alt="" width="600" height="600" />
+      <div class="container">
+        <form action="">
+          <h2>Policy Holder Information</h2>
+          <label for="">Full Name as per IC/Passport</label>
+          <input type="text" />
+          <br /><br />
+          <label for="">Phone number</label>
+          <input type="text" />
+          <label for="">Email</label>
+          <input type="text" />
+          <br /><br />
+          <label for="">Address</label><br />
+          <textarea name="" id=""></textarea><br /><br />
+
+          <h2>Policy Details</h2>
+          <label for="">Insurance Type</label>
+          <select name="" id="">
+            <option value="">Medical Coverage</option>
+            <option value="">Trip Cancellation</option>
+            <option value="">Personal Belongings Coverage</option>
+          </select>
+          <br /><br />
+          <label for="">Insurance Company</label>
+          <input type="text" />
+          <br />
+          <br />
+          <h2>Documents</h2>
+          <input class="file" type="file" id="myFile" name="filename" />
+          <br /><br />
+          <button class="submitBtn" type="submit">Submit</button>
+        </form>
       </div>
     </div>
 
