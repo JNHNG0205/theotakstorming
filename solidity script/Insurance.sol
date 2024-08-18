@@ -24,7 +24,7 @@ contract SimpleInsurance {
     // Function to purchase insurance
     function purchaseInsurance() external payable {
         require(msg.value > 0, "Ether value must be greater than 0");
-        require(insurances[msg.sender].premiumPaid == 0, "Insurance already purchased");
+        
 
         uint256 claimable = msg.value * 2;
 
@@ -34,7 +34,11 @@ contract SimpleInsurance {
             hasClaimed: false
         });
 
-        // Immediately send the claimable amount to the user's wallet
+        emit InsurancePurchased(msg.sender, msg.value, claimable);
+    }
+
+    // Function to claim the insurance
+    function claimInsurance() external {
         sendClaimToUser(msg.sender);
     }
 
@@ -43,7 +47,7 @@ contract SimpleInsurance {
         Insurance storage userInsurance = insurances[user];
 
         require(userInsurance.premiumPaid > 0, "No insurance purchased");
-        require(!userInsurance.hasClaimed, "Insurance already claimed");
+   
         require(userInsurance.claimableAmount <= address(this).balance, "Contract has insufficient funds");
 
         uint256 claimAmount = userInsurance.claimableAmount;
@@ -52,8 +56,14 @@ contract SimpleInsurance {
         // Send the claimable amount to the user's wallet
         (bool success, ) = user.call{value: claimAmount}("");
         require(success, "Transfer failed");
+
+        emit InsuranceClaimed(user, claimAmount);
     }
 
     // Fallback function to receive Ether
     receive() external payable {}
+
+    // Events for logging
+    event InsurancePurchased(address indexed user, uint256 premiumPaid, uint256 claimableAmount);
+    event InsuranceClaimed(address indexed user, uint256 claimAmount);
 }
